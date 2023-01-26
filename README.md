@@ -98,7 +98,7 @@ sudo service nifi stop
 ```
 
 #### Service Portals: 
-From the same VM below URLs can be access through browser.
+From the same VM below URLs can be access through browser.<br>
 namenode: http://localhost:9870<br>
 datanode: http://localhost:9864<br>
 yarn manager: http://localhost:8088<br>
@@ -237,7 +237,10 @@ The SelectHiveQL has an additional property, "HiveQL Post-Query". This property 
 Please check the <a href="https://nifi.apache.org/developer-guide.html">NiFi Developer Manual</a> for proper configuration of the connections, loop back, and error handling. Also buffer, wait time, recurrence parameters need to be configured for each processor based on the requirements. 
 
 ## Execution and Results
-The workflow can be scheduled based on event or time(cron). Once the starting point is executed, the workflow will be completed accordingly. 
+The workflow can be scheduled based on event or time(cron). Once the starting point is executed, the workflow will be completed accordingly and data will be loaded in final table. The data can be accessed from Hive beeline editor. 
+
+![Result](https://user-images.githubusercontent.com/99446979/214944963-f22b0d2c-fd66-4e92-8ed5-9cf30e54a2f1.png)
+
 
 In this case, the external table method takes less than a minute to insert 2.9Mn records in the Hive database. In contrast, the JDBC connection takes 5 minutes to execute a batch of 1000 insert statements. Hence external table method should be used for bulk data insertion in the data warehouse environment.
 
