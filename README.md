@@ -241,13 +241,10 @@ The workflow can be scheduled based on event or time(cron). Once the starting po
 
 ![Result](https://user-images.githubusercontent.com/99446979/214944963-f22b0d2c-fd66-4e92-8ed5-9cf30e54a2f1.png)
 
-
 In this case, the external table method takes less than a minute to insert 2.9Mn records in the Hive database. In contrast, the JDBC connection takes 5 minutes to execute a batch of 1000 insert statements. Hence external table method should be used for bulk data insertion in the data warehouse environment.
 
 ## Conclusion:
-Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. 
+Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. The configuration and resource allocation is the most important thing while working with Big Data platforms.
 
-## Glosarry:
-https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx
 
 
