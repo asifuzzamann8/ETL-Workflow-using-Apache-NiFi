@@ -32,18 +32,18 @@ All the supporting tutorials are provided so that this document can be used as a
         <td>Bigdata framework </td>
         <td>Apache Hadoop</td>
         <td>3.1.2</td>
-        <td><a href="url">Download Link</a></td>
+        <td><a href="https://archive.apache.org/dist/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz">Download Link</a></td>
     </tr>
     <tr>
         <td>Database </td>
         <td>Apache Hive</td>
         <td>3.1.2</td>
-        <td><a href="url">Download Link</a></td>
+        <td><a href="https://downloads.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz">Download Link</a></td>
     </tr>
     <tr>
         <td>ETL Tool</td>
         <td>Apache NiFi</td>
         <td>1.16.0</td>
-        <td><a href="url">Download Link</a></td>
+        <td><a href="https://dlcdn.apache.org/nifi/1.16.0/nifi-1.16.0-bin.tar.gz">Download Link</a></td>
     </tr>
 </table>
