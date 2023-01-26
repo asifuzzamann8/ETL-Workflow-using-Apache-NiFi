@@ -26,7 +26,7 @@ All the supporting tutorials are provided so that this document can be used as a
         <td>OS </td>
         <td>Ubuntu </td>
         <td>20.04</td>
-        <td><a href="url">Download Link</a></td>
+        <td><a href="https://ubuntu.com/download/desktop">Download Link</a></td>
     </tr>
     <tr>
         <td>Bigdata framework </td>
