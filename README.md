@@ -7,6 +7,7 @@ All the supporting tutorials are provided so that this document can be used as a
 As part of the ETL process, the data needs to be fetched from UCI Machine Learning Repository from HTTPS link. The compressed file will be extracted. The dataset contains 2,916,697 records and ten attributes. The target column contains the name of families, including the Ransomware ones (e.g., Cryptxxx, cryptolocker etc). A new column needs to be added to flag the probable Ransomware transaction. Also, column names will be changed to avoid system keywords (e.g. year, day, and count). After the required transformation, data will be inserted into the data warehouse (HIVE) for future use.
 
 ## Platform & Tools
+Archieve location is shared. Please check version compatibility before downloading the files.
 <table>
     <tr>
         <td>Purpose</td>
