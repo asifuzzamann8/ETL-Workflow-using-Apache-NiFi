@@ -47,7 +47,10 @@ As part of the ETL process, the data needs to be fetched from UCI Machine Learni
 </table>
 
 ## Set up Big Data 
-The following section briefly describes the required steps to configure Hadoop and Hive. Configuration files are shared in folders. Essential commands are added to the glossary file.
+The following section briefly describes the required steps to configure Hadoop and Hive. For set up, different .xml and .env files need to be configured. The details installion tutorial links are pasted with each section. On top of that cross check with the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx">Glossary File</a> for any additional configuration and essential parts included for this project. Copy of my configuration files are also shared in the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/tree/main/Configs">Configs</a> folder. 
+
+
+
 
 ### Install VMware and Os:
 VMware is installed on a Windows machine (Laptop with six cores and 24GB memory). Although the procedure is simple, the memory and process allocation should be done accordingly. 8GB of memory, three cores, and 30GB of space are allocated for this project.
@@ -74,6 +77,76 @@ Apache NiFi was built to automate the flow of data between systems. It supports 
 NiFi is developed to manage huge data volumes with high throughput and low latency. It is advised to install NiFi on a separate server with dedicated raid space for logs and contents for the production environment. However, the same server is used for this project. The archive configuration and Java heap size need to be changed to run it smoothly. The log files need to be checked regularly for warnings.  
 
 NiFi installation Guide: <a href="https://nifi.apache.org/docs/nifi-docs/html/getting-started.html">Youtube Tutorial</a> 
+
+### Manage Services:
+#### Start:
+Once installed and configured, the services can be started with below commands in terminal.
+```
+cd /home/hadoop/hadoop-3.1.2/sbin
+./start-dfs.sh
+./start-yarn.sh
+hive --service metastore
+hiveserver2
+sudo service nifi start
+```
+
+#### Stop:
+```
+stop-dfs.sh 
+stop-yarn.sh
+sudo service nifi stop
+```
+
+#### Service Portals: 
+From the same VM below URLs can be access through browser.
+namenode: http://localhost:9870<br>
+datanode: http://localhost:9864<br>
+yarn manager: http://localhost:8088<br>
+hive: http://localhost:10002/<br>
+nifi: https://localhost:8443/nifi/login
+
+## Hive Database Setup
+The destination tables are created before workflow design. Both regular table and external table is created with same table structure. The purpose will be discussed in the following sections.
+
+### Access through Terminal
+```
+beeline -u jdbc:hive2://localhost:10000
+```
+### Create Database:
+```
+CREATE DATABASE ETL;
+SHOW DATABASES;
+USE ETL;
+```
+
+### Create Normal Hive Table:
+```
+CREATE TABLE IF NOT EXISTS etl.uci_ransomware (address string, year_at int, day_at int, length int, weight string, count_of int, looped int, neighbors int, income string, label string, ransomware int)
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ',';
+
+CREATE TABLE IF NOT EXISTS etl.uci_ransomware_v2 (address string, year_at int, day_at int, length int, weight string, count_of int, looped int, neighbors int, income string, label string, ransomware int)
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ',';
+```
+
+### External Table Set Up:
+From terminal create HDFS Location and Structure.
+```
+hdfs dfs -mkdir -p /user/hive/uci_ransomware_ext
+hdfs dfs -chmod g+w /user/hive/uci_ransomware_ext
+hdfs dfs -ls /user/hive
+```
+
+### External Table Creation in Hive:
+```
+CREATE EXTERNAL TABLE IF NOT EXISTS etl.uci_ransomware_ext (address string, year_at int, day_at int, length int, weight string, count_of int, looped int, neighbors int, income string, label string, ransomware int)
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/hive/uci_ransomware_ext'
+tblproperties ("skip.header.line.count"="1");
+```
 
 ## ETL Workflow Development in NiFi
 NiFi's fundamental design concepts closely relate to the main ideas of Flow-Based Programming. Data or "FlowFile" is moved from one step to another for required processing and transformation. Each task is completed by the "FlowFile Processor". Connection defines the relationship among processors. 
