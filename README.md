@@ -54,6 +54,23 @@ VMware is installed on a Windows machine (Laptop with six cores and 24GB memory)
 
 VM and Ubuntu installation guide: <a href="https://unixcop.com/how-to-install-ubuntu-21-04-on-vmware-workstation-pro/">Click Here</a>
 
+### Hadoop:
+As a prerequisite for Hadoop, JDK 8 and OpenSHH needs to be installed. A separate os user is created for better management and security. Hadoop is downloaded from the mentioned link. The linux bash profile and configuration files should be updated with caution. The required commands are given in the glossary.     
+
+Hadoop installation guide: <a href="https://phoenixnap.com/kb/install-hadoop-ubuntu">Click Here</a>
+
+### Hive:
+Apache Hive is a data warehouse software project built on Apache Hadoop to provide SQL query and analysis features. In the backend, it runs a map-reduce process to extract data from HDFS. Hive is installed to store and manage the data for further analysis.  
+
+Hive requires a conventional relational DB to store the necessary metadata for its management. The default installation comes with a derby database. However, accessing Hive from external tools or servers requires concurrent sessions. HiveServer2 facilitates the necessary services. It requires MySQL database as the metadatabase. Special care should be given to download the correct version of MySQL JDBC connector. The detailed steps are given in the glossary. 
+
+Hive installation guide: <a href="https://phoenixnap.com/kb/install-hive-on-ubuntu">Click Here</a>
+HiveServer2 config details: <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-HiveServer2">Click Here</a>
+HiveServer2 config: <a href="https://youtu.be/BZAfoQMrkmk">Youtube Tutorial</a> 
+
+
+
+
 
   
 
