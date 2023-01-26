@@ -149,9 +149,11 @@ tblproperties ("skip.header.line.count"="1");
 ```
 
 ## ETL Workflow Development in NiFi
-NiFi's fundamental design concepts closely relate to the main ideas of Flow-Based Programming. Data or "FlowFile" is moved from one step to another for required processing and transformation. Each task is completed by the "FlowFile Processor". Connection defines the relationship among processors. 
+NiFi's fundamental design concepts closely relate to the main ideas of Flow-Based Programming. Data or "FlowFile" is moved from one step to another for required processing and transformation. Each task is completed by the "FlowFile Processor". Connection defines the relationship among processors.
 
 Details Overview of NiFi: <a href="https://nifi.apache.org/docs/nifi-docs/html/overview.html#the-core-concepts-of-nifi">Click Here</a>
+
+The final NiFi workflow xml template: <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/tree/main/NiFi%20Template">Click Here</a>. The template can be directly exported once NiFi is configured properly. 
 
 <p>
     <img src="https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png" alt><br>
@@ -189,7 +191,7 @@ Twitter Data Example: <a href="https://www.velotio.com/engineering-blog/building
 #### ExecuteStreamCommand (ExecutePythonScript): 
 This processor can execute external commands on the content of the FlowFile and creates a new FlowFile with the results. The FlowFile content in the input can be accessed as STDIN, and the processor can forward STOUT from the command as an output to the next processor. 
 
-The below figure shows the configuration of the processor. It takes a python script as the command. The python script takes the STDIN and updates the dataset with an additional "Ransomware" flag column based on the label value. In addition, it supports code blocks (Groovy, Jython, Javascript, JRuby) instead of the script from the local machine.
+The below figure shows the configuration of the processor. It takes a python script (<a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/blob/07fd353d3435053934588a687c8264a5a40e1470/Scripts/nifi_uci_std.py">Click for the script</a>) as the command. The python script takes the STDIN and updates the dataset with an additional "Ransomware" flag column based on the label value. In addition, it supports code blocks (Groovy, Jython, Javascript, JRuby) instead of the script from the local machine.
 
 ![ExecuteStreamCommand](https://user-images.githubusercontent.com/99446979/214926076-908b9a45-5d9c-46c5-ab13-858ef2b298a6.png)
 
@@ -224,7 +226,7 @@ The aforementioned process executes single insert statements in a queue. It requ
 In this method, CSV data is transferred into a file location of HDFS. A Hive external table is defined in the database, which points to the same directory, and the table properties should match the columns and delimiter of the CSV file. Basically, the external table is an abstraction that presents the data in the CSV file as a table. However, it doesn't hold any information. The data will stay in the CSV file even if the external table architecture is dropped. Then an insert statement from the external table to the normal Hive table transfers all the data into the database. Since the operation happens within the HDFS, the execution time is much faster than the JDBC connection request.   
 
 #### ExecuteStreamCommand (ExecuteShellScript):
-A shell script is called using this processor to add the Ransomware flag column in the dataset and transfer the updated CSV file to the HDFS location. 
+A shell script (<a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/blob/07fd353d3435053934588a687c8264a5a40e1470/Scripts/test.sh">Click for the script</a>) is called using this processor to add the Ransomware flag column in the dataset and transfer the updated CSV file to the HDFS location. 
 
 ![ExecuteShellScript](https://user-images.githubusercontent.com/99446979/214928795-722ac385-b453-42bc-aaa2-056ce3880875.png)
 
