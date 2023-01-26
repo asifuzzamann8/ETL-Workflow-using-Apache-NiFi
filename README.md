@@ -82,6 +82,11 @@ Details Overview of NiFi: <a href="https://nifi.apache.org/docs/nifi-docs/html/o
 
 ![Picture1](https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png)
 
+<p>
+    <img src="[path_to_image](https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png)" alt>
+    <em>Nifi Processors Design - Final Workflow</em>
+</p>
+
 
 
 
