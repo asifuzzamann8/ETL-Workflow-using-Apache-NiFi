@@ -171,4 +171,7 @@ In this case, the external table method takes less than a minute to insert 2.9Mn
 ## Conclusion:
 Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. 
 
+## Glosarry:
+https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx
+
 
