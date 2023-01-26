@@ -19,39 +19,36 @@ Archieve location is shared. Please check version compatibility before downloadi
         <td>Virtualization</td>
         <td>VMWare Workstation Player</td>
         <td>16</td>
-        <td><a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html" target="_blank">Download Link</a></td>
+        <td><a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html" target="_blank">Click Here</a></td>
     </tr>
     <tr>
         <td>OS </td>
         <td>Ubuntu </td>
         <td>20.04</td>
-        <td><a href="https://ubuntu.com/download/desktop">Download Link</a></td>
+        <td><a href="https://ubuntu.com/download/desktop">Click Here</a></td>
     </tr>
     <tr>
         <td>Bigdata framework </td>
         <td>Apache Hadoop</td>
         <td>3.1.2</td>
-        <td><a href="https://archive.apache.org/dist/hadoop/common/">Download Link</a></td>
+        <td><a href="https://archive.apache.org/dist/hadoop/common/">Click Here</a></td>
     </tr>
     <tr>
         <td>Database </td>
         <td>Apache Hive</td>
         <td>3.1.2</td>
-        <td><a href="https://archive.apache.org/dist/hive/">Download Link</a></td>
+        <td><a href="https://archive.apache.org/dist/hive/">Click Here</a></td>
     </tr>
     <tr>
         <td>ETL Tool</td>
         <td>Apache NiFi</td>
         <td>1.16.0</td>
-        <td><a href="https://archive.apache.org/dist/nifi/">Download Link</a></td>
+        <td><a href="https://archive.apache.org/dist/nifi/">Click Here</a></td>
     </tr>
 </table>
 
 ## Set up Big Data 
 The following section briefly describes the required steps to configure Hadoop and Hive. For set up, different .xml and .env files need to be configured. The details installion tutorial links are pasted with each section. On top of that cross check with the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx">Glossary File</a> for any additional configuration and essential parts included for this project. Copy of my configuration files are also shared in the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/tree/main/Configs">Configs</a> folder. 
-
-
-
 
 ### Install VMware and Os:
 VMware is installed on a Windows machine (Laptop with six cores and 24GB memory). Although the procedure is simple, the memory and process allocation should be done accordingly. 8GB of memory, three cores, and 30GB of space are allocated for this project.
@@ -248,6 +245,3 @@ In this case, the external table method takes less than a minute to insert 2.9Mn
 
 ## Conclusion:
 Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. The configuration and resource allocation is the most important thing while working with Big Data platforms.
-
-
-
