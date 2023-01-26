@@ -48,7 +48,7 @@ Archieve location is shared. Please check version compatibility before downloadi
 </table>
 
 ## Set up Big Data 
-The following section briefly describes the required steps to configure Hadoop and Hive. For set up, different .xml and .env files need to be configured. The details installion tutorial links are pasted with each section. On top of that cross check with the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx">Glossary File</a> for any additional configuration and essential parts included for this project. Copy of my configuration files are also shared in the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/tree/main/Configs">Configs</a> folder. 
+The following section briefly describes the required steps to configure Hadoop and Hive. For set up, different .xml and .env files need to be configured. The details installation tutorial links are pasted with each section. On top of that cross check with the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/blob/442b7bf06d3db09aa6e2362aca026fbed06ea0a0/Project%20Glossary.docx">Glossary File</a> for any additional configuration and essential parts included for this project. Copy of my configuration files are also shared in the <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi-/tree/main/Configs">Configs</a> folder. 
 
 ### Install VMware and Os:
 VMware is installed on a Windows machine (Laptop with six cores and 24GB memory). Although the procedure is simple, the memory and process allocation should be done accordingly. 8GB of memory, three cores, and 30GB of space are allocated for this project.
