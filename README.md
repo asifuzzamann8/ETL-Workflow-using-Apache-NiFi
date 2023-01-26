@@ -14,13 +14,13 @@ All the supporting tutorials are provided so that this document can be used as a
         <td>Purpose</td>
         <td>Name</td>
         <td>Version</td>
-        <td><a href="url">Download Link</a></td>
+        <td>Download Link</td>
     </tr>
     <tr>
         <td>Virtualization</td>
         <td>VMWare Workstation Player</td>
         <td>16</td>
-        <td><a href="url">Download Link</a></td>
+        <td><a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html">Download Link</a></td>
     </tr>
     <tr>
         <td>OS </td>
