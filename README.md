@@ -20,7 +20,7 @@ All the supporting tutorials are provided so that this document can be used as a
         <td>Virtualization</td>
         <td>VMWare Workstation Player</td>
         <td>16</td>
-        <td><a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html">Download Link</a></td>
+        <td><a href="https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html" target="_blank">Download Link</a></td>
     </tr>
     <tr>
         <td>OS </td>
