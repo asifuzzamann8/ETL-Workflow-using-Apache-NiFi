@@ -75,21 +75,100 @@ NiFi is developed to manage huge data volumes with high throughput and low laten
 
 NiFi installation Guide: <a href="https://nifi.apache.org/docs/nifi-docs/html/getting-started.html">Youtube Tutorial</a> 
 
-## ETL Workflow Development in NiFi:
+## ETL Workflow Development in NiFi
 NiFi's fundamental design concepts closely relate to the main ideas of Flow-Based Programming. Data or "FlowFile" is moved from one step to another for required processing and transformation. Each task is completed by the "FlowFile Processor". Connection defines the relationship among processors. 
 
 Details Overview of NiFi: <a href="https://nifi.apache.org/docs/nifi-docs/html/overview.html#the-core-concepts-of-nifi">Click Here</a>
 
 <p>
-    <img src="https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png" alt>
-    <em>Nifi Processors Design - Final Workflow</em>
+    <img src="https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png" alt><br>
+    <em>Nifi Processors Design - Final Workflow<br>
+        Blue: Common processors for Data Pulling<br> 
+        Orange: Insert directly into Hive Table Using JDBC Connection<br>
+        Green: Insert Using External Hive Table
+    </em>
 </p>
 
+As shown above, total 10 FlowFile Processors are configured to complete all the steps discussed in the ETL Workflow Description. The marked blue processors are for data fetching. Data transform and loading in Hive table is performed in two different methods (Marked green and orange). The processes are described in the following sections.
 
+### Common Processors for Data Pulling:
 
+#### InvokeHTTP:
+It is an HTTP client processor which can interact with a configurable HTTP endpoint. It is capable of processing API requests. SSL certificate needs to be downloaded from the site and configured in the processor to fetch data from Rest API/HTTPs. The figure below shows the required configuration, including URL, HTTP Method (Get/post), SSL Context Service, and others. <a href="https://www.youtube.com/watch?v=Jk7H8w3evN0">Youtube Tutorial</a> for the required process to configure the processor and SSL certificate.
 
+![InvokeHTTP](https://user-images.githubusercontent.com/99446979/214915398-944489f0-8760-4c06-820a-87cf74e9c96d.png)
 
+#### UnpackContent:
+This processor takes a compressed file as an input and delivery uncompressed files as output. The compression type and file name can be filtered from this processor. 
 
-  
+![UnpackContent](https://user-images.githubusercontent.com/99446979/214915742-88632cc7-286b-44cd-bc17-3554ce45dcca.png)
+
+#### PutFile:
+The uncompressed file is forwarded to the PutFile processor to store it in the local file system. 
+
+![PutFile](https://user-images.githubusercontent.com/99446979/214915969-b139a317-2686-426e-ad60-cfcab2565950.png)
+
+### Insert directly into Hive Table Using JDBC Connection: 
+This method ingests data in the Hive table straight from the NiFi application using the Hive JDBC connection.
+
+Twitter Data Example: <a href="https://www.velotio.com/engineering-blog/building-an-etl-workflow-using-apache-nifi-and-hive">Click Here</a>
+
+#### ExecuteStreamCommand (ExecutePythonScript): 
+This processor can execute external commands on the content of the FlowFile and creates a new FlowFile with the results. The FlowFile content in the input can be accessed as STDIN, and the processor can forward STOUT from the command as an output to the next processor. 
+
+The below figure shows the configuration of the processor. It takes a python script as the command. The python script takes the STDIN and updates the dataset with an additional "Ransomware" flag column based on the label value. In addition, it supports code blocks (Groovy, Jython, Javascript, JRuby) instead of the script from the local machine.
+
+![ExecuteStreamCommand](https://user-images.githubusercontent.com/99446979/214926076-908b9a45-5d9c-46c5-ab13-858ef2b298a6.png)
+
+#### ReplaceText (RenameHeader):
+The ReplaceText processor is used to rename the header names with system keywords like year, day, and count.
+
+![ReplaceText](https://user-images.githubusercontent.com/99446979/214926335-587dd914-d88f-4acd-9fb3-c2403ed8b1ea.png)
+
+#### QueryRecords (FilterRecords):
+QueryRecords processor can perform SQL-like queries directly on the FlowFile content. Also, the data format can be changed with this processor. In this case, the CSV format is converted into JSON for further processing compatibility. Record Reader/Writer value needs to be configured with the arrow sign on the right. In this figure, a new property "data" is included with the "+" sign in the top right corner, and an SQL query is provided as an input. The SQL query should not have any ";" at the end as the processor.
+
+![QueryRecords](https://user-images.githubusercontent.com/99446979/214926646-54e48248-7ee9-4729-bb33-239118e7910d.png)
+
+#### ConvertJSONToSQL:
+This processor transforms each entry of the JSON file into an SQL INSERT statement. The database JDBC connection pool needs to be created for this processor. The detail of the configuration is given below. Database connection URL, Database user, and Password are provided. The path of hive-site.xml should be provided in the Hive configuration resources box. Although it is not a mandatory parameter, without the Validation query "Select 1 as Test_column" the connection cannot be established.   
+Moreover, table and schema names need to be provided as input. Also, SQL parameter attributes have to be defined. In this case, "hiveql" is the correct input. The output FlowFile is a queue of insert statements. The hive table creation DDL is given in the glossary. 
+
+![HiveConnectionPool](https://user-images.githubusercontent.com/99446979/214927100-186ef1b4-4706-4940-a1ca-6c89980e0b92.png)
+
+![ConvertJsonToSQL](https://user-images.githubusercontent.com/99446979/214927222-5389d846-0f27-4b13-8505-c1031d970d72.png)
+
+#### PutHiveQL:
+It receives insert statements as input in the FlowFile and executes it in the Hive database through a JDBC connection.
+
+![PutHiveQL](https://user-images.githubusercontent.com/99446979/214927354-0ad6c002-9043-4fdd-a9a2-e12e0ca25ad0.png)
+
+Once completed, all records will be inserted in Hive. 
+
+### Insert Using External Hive Table:
+The aforementioned process executes single insert statements in a queue. It requires a lot of time due to JDBC connection overhead. In addition, Hive works differently than transactional databases and is not suitable for single insert statements. Hence, to improve the data insertion time below method is proposed using Hive external table functionality. 
+
+In this method, CSV data is transferred into a file location of HDFS. A Hive external table is defined in the database, which points to the same directory, and the table properties should match the columns and delimiter of the CSV file. Basically, the external table is an abstraction that presents the data in the CSV file as a table. However, it doesn't hold any information. The data will stay in the CSV file even if the external table architecture is dropped. Then an insert statement from the external table to the normal Hive table transfers all the data into the database. Since the operation happens within the HDFS, the execution time is much faster than the JDBC connection request.   
+
+#### ExecuteStreamCommand (ExecuteShellScript):
+A shell script is called using this processor to add the Ransomware flag column in the dataset and transfer the updated CSV file to the HDFS location. 
+
+![ExecuteShellScript](https://user-images.githubusercontent.com/99446979/214928795-722ac385-b453-42bc-aaa2-056ce3880875.png)
+
+#### SelectHiveQL (InsertFromExtrenalTable):
+The SelectHiveQL has an additional property, "HiveQL Post-Query". This property is used in this step to execute the insert statement from the external table to Hive table. For the primary "HiveQl Select Query", a dummy statement has been provided.
+
+![SelectHiveQL](https://user-images.githubusercontent.com/99446979/214929080-f86f41c6-007c-49f6-8942-15e820c6ceec.png)
+
+### Additional Configuration:
+Please check the <a href="https://nifi.apache.org/developer-guide.html">NiFi Developer Manual</a> for proper configuration of the connections, loop back, and error handling. Also buffer, wait time, recurrence parameters need to be configured for each processor based on the requirements. 
+
+## Execution and Results
+The workflow can be scheduled based on event or time(cron). Once the starting point is executed, the workflow will be completed accordingly. 
+
+In this case, the external table method takes less than a minute to insert 2.9Mn records in the Hive database. In contrast, the JDBC connection takes 5 minutes to execute a batch of 1000 insert statements. Hence external table method should be used for bulk data insertion in the data warehouse environment.
+
+## Conclusion:
+Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. 
 
 
