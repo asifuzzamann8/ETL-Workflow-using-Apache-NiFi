@@ -243,5 +243,13 @@ The workflow can be scheduled based on event or time(cron). Once the starting po
 
 In this case, the external table method takes less than a minute to insert 2.9Mn records in the Hive database. In contrast, the JDBC connection takes 5 minutes to execute a batch of 1000 insert statements. Hence external table method should be used for bulk data insertion in the data warehouse environment.
 
-## Conclusion:
+## Road Blocks and Solutions
+> Hive won’t work without exact version of MySQL JDBC connector<br>
+> Mar Reduce merory allocation needs to be changed<br>
+> NiFi needs a restart after default password change<br>
+> NiFI Hive JDBC connection won’t work without Validation query<br>
+> NiFi Java default heap size needs to be increased<br> 
+> NiFi archive needs to be purged regularly
+
+## Conclusion
 Overall, NiFi is a reasonably simple ETL design tool. The GUI makes it easy to understand. The 200+ built-in processors serve all the purposes of modern data ingestion needs. The connections can hold the FlowFile in case of failure. It provides an efficient way to execute the workflow from the point of failure. Using Kafka, NiFi can serve the purpose of message queueing as well. Also, the custom script execution makes NiFi versatile to make any custom operations. However, it losses cache information if the primary node gets disconnected. NiFi cluster can solve this problem. The configuration and resource allocation is the most important thing while working with Big Data platforms.
