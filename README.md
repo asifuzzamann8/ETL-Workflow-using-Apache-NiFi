@@ -154,7 +154,7 @@ Details Overview of NiFi: <a href="https://nifi.apache.org/docs/nifi-docs/html/o
 For the final NiFi workflow xml template, <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/tree/main/NiFi%20Template">Click Here</a>. The template can be directly exported once NiFi is configured properly. 
 
 <p>
-    <img src="https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png" alt><br>
+    <img src="https://user-images.githubusercontent.com/99446979/214979544-a412afea-d121-498c-8535-fd9ee08c3eb2.jpg" alt><br>
     <em>Nifi Processors Design - Final Workflow<br>
         Blue: Common processors for Data Pulling<br> 
         Orange: Insert directly into Hive Table Using JDBC Connection<br>
