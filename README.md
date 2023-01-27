@@ -65,8 +65,8 @@ Apache Hive is a data warehouse software project built on Apache Hadoop to provi
 
 Hive requires a conventional relational DB to store the necessary metadata for its management. The default installation comes with a derby database. However, accessing Hive from external tools or servers requires concurrent sessions. HiveServer2 facilitates the necessary services. It requires MySQL database as the metadatabase. Special care should be given to download the correct version of MySQL JDBC connector. The detailed steps are given in the glossary. 
 
-Hive installation guide: <a href="https://phoenixnap.com/kb/install-hive-on-ubuntu">Click Here</a>
-HiveServer2 config details: <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-HiveServer2">Click Here</a>
+Hive installation guide: <a href="https://phoenixnap.com/kb/install-hive-on-ubuntu">Click Here</a><br>
+HiveServer2 config details: <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-HiveServer2">Click Here</a><br>
 HiveServer2 config: <a href="https://youtu.be/BZAfoQMrkmk">Youtube Tutorial</a> 
 
 ### NiFi:
@@ -74,7 +74,7 @@ Apache NiFi was built to automate the flow of data between systems. It supports 
 
 NiFi is developed to manage huge data volumes with high throughput and low latency. It is advised to install NiFi on a separate server with dedicated raid space for logs and contents for the production environment. However, the same server is used for this project. The archive configuration and Java heap size need to be changed to run it smoothly. The log files need to be checked regularly for warnings.  
 
-NiFi installation Guide: <a href="https://nifi.apache.org/docs/nifi-docs/html/getting-started.html">Youtube Tutorial</a> 
+NiFi installation Guide: <a href="https://nifi.apache.org/docs/nifi-docs/html/getting-started.html">Click Here</a> 
 
 ### Manage Services:
 #### Start:
@@ -151,7 +151,7 @@ NiFi's fundamental design concepts closely relate to the main ideas of Flow-Base
 
 Details Overview of NiFi: <a href="https://nifi.apache.org/docs/nifi-docs/html/overview.html#the-core-concepts-of-nifi">Click Here</a>
 
-The final NiFi workflow xml template: <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/tree/main/NiFi%20Template">Click Here</a>. The template can be directly exported once NiFi is configured properly. 
+For the final NiFi workflow xml template, <a href="https://github.com/asifuzzamann8/ETL-Workflow-using-Apache-NiFi/tree/main/NiFi%20Template">Click Here</a>. The template can be directly exported once NiFi is configured properly. 
 
 <p>
     <img src="https://user-images.githubusercontent.com/99446979/214911261-02edd756-98ab-4a23-938a-9b1652157eee.png" alt><br>
